@@ -86,4 +86,4 @@ $request = new Request(CONSTANTS::ACCESS_TOKEN, CONSTANTS::CHANNEL_SECRET, $logg
 $pdo = connect();
 $timetable = construct_timetable($pdo);
 $serif = select_serif($pdo);
-process_serif($serif, $timetable);
+process_serif($request, $serif, $timetable);
