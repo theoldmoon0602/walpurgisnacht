@@ -57,15 +57,29 @@ function set_timetable_for_date($pdo, $date, $classes)
 	}
 }
 
-function get_events($pdo, $now=null)
+function get_events_for_date($pdo, $date)
 {
-	if (is_null($now)) {
-		$now = mktime(0,0,0);
+	$events = [];
+	$stmt = $pdo->prepare('select * from events where date = :date order by date asc');
+	$stmt->execute([':date' => date('Ymd', $date)]);
+	foreach ($stmt as $row) {
+		$events []= $row;
+	}
+
+	return $events;
+}
+
+
+
+function get_events($pdo, $today=null)
+{
+	if (is_null($today)) {
+		$today = date('Ymd', time());
 	}
 
 	$events = [];
-	$stmt = $pdo->prepare('select * from events where date > :now order by date asc');
-	$stmt->execute([':now' => $now]);
+	$stmt = $pdo->prepare('select * from events where date >= :today order by date asc');
+	$stmt->execute([':today' => $today]);
 	foreach ($stmt as $row) {
 		$events []= $row;
 	}
@@ -76,13 +90,13 @@ function get_events($pdo, $now=null)
 function add_event($pdo, $content, $date)
 {
 	$stmt = $pdo->prepare('insert into events(content, date) values (:content, :date);');
-	$stmt->execute([':content' => $content, ':date' => $date]);
+	$stmt->execute([':content' => $content, ':date' => date('Ymd', $date)]);
 }
 
 function edit_event($pdo, $id, $content , $date)
 {
 	$stmt = $pdo->prepare('update events set content = :content, date = :date where id = :id');
-	$stmt->execute([':id' => $id, ':content' => $content, ':date' => $date]);
+	$stmt->execute([':id' => $id, ':content' => $content, ':date' => date('Ymd', $date)]);
 }
 
 function delete_event($pdo, $id)
