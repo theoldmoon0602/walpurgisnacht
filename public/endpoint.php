@@ -4,7 +4,7 @@ require_once("../define.php");
 
 // verify request
 $logger = new PoorLogger(CONSTANTS::LOGFILE);
-$request = new Request(CONSTANTS::ACCCSS_TOKEN, CONSTANTS::CHANNEL_SECRET, $logger);
+$request = new Request(CONSTANTS::ACCESS_TOKEN, CONSTANTS::CHANNEL_SECRET, $logger);
 if (! $request->verify()) {
     $logger->info("Signature is mismatched");
     exit();

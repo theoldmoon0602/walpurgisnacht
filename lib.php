@@ -52,7 +52,7 @@ function set_timetable_for_date($pdo, $date, $classes)
 		$stmt->execute([':date' => date('Ymd', $date), ':classes' => serialize($classes)]);
 	}
 	else {
-		$stmt = $pdo->prepare('update timetable set classes = :classes where date = :date');
+		$stmt = $pdo->prepare('update date_timetable set classes = :classes where date = :date');
 		$stmt->execute([':date' => date('Ymd', $date), ':classes' => serialize($classes)]);
 	}
 }
