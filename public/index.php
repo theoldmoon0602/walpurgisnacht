@@ -1,11 +1,11 @@
 <?php
 
 require_once '../define.php';
-if (!isset($_GET['key']) || $_Get['key'] != CONSTANTS::KEY) {
-	exit();
+if (!isset($_GET['key']) || $_GET['key'] != CONSTANTS::KEY) {
+        exit();
 }
-?>
 
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -155,7 +155,7 @@ if (!isset($_GET['key']) || $_Get['key'] != CONSTANTS::KEY) {
 		</div>
 
 
-		<form method="post" action="/api.php?query=upload_image" enctype="multipart/form-data">
+		<form method="post" action="api.php?query=upload_image" enctype="multipart/form-data">
 			<input type="file" name="file" required />
 			<button>画像をアップロード</button>
 		</form>
@@ -210,7 +210,7 @@ if (!isset($_GET['key']) || $_Get['key'] != CONSTANTS::KEY) {
 			},
 			methods: {
 				get_memos: function() {
-					fetch('/api.php?query=get_memos')
+					fetch('api.php?query=get_memos')
 						.then(r => r.json())
 						.then(r => {
 							this.memos = r;
@@ -221,7 +221,7 @@ if (!isset($_GET['key']) || $_Get['key'] != CONSTANTS::KEY) {
 					if (memo_content) {
 						this.new_memo_content = "";
 
-						fetch('/api.php?query=add_memo&content=' + encodeURI(memo_content))
+						fetch('api.php?query=add_memo&content=' + encodeURI(memo_content))
 							.then(_ => { this.get_memos(); });
 					}
 				},
@@ -230,7 +230,7 @@ if (!isset($_GET['key']) || $_Get['key'] != CONSTANTS::KEY) {
 					this.delete_memo(memo);
 				},
 				delete_memo: function(memo) {
-						fetch('/api.php?query=delete_memo&id=' + encodeURI(memo.id))
+						fetch('api.php?query=delete_memo&id=' + encodeURI(memo.id))
 						.then(_ => { this.get_memos(); });
 				},
 
@@ -242,7 +242,7 @@ if (!isset($_GET['key']) || $_Get['key'] != CONSTANTS::KEY) {
 						}
 				},
 				get_events: function(date) {
-					fetch('/api.php?query=get_events&date='+encodeURI(date))
+					fetch('api.php?query=get_events&date='+encodeURI(date))
 						.then(r => r.json())
 						.then(r => {
 							this.set_event(r);
@@ -258,7 +258,7 @@ if (!isset($_GET['key']) || $_Get['key'] != CONSTANTS::KEY) {
 						this.new_event_date = date_format(new Date(), "-");
 						this.new_event_content = "";
 
-						fetch('/api.php?query=add_event&content=' + encodeURI(event_content) + '&date=' + encodeURI(t))
+						fetch('api.php?query=add_event&content=' + encodeURI(event_content) + '&date=' + encodeURI(t))
 						.then(_ => { this.get_events(this.today); });
 					}
 				},
@@ -269,11 +269,11 @@ if (!isset($_GET['key']) || $_Get['key'] != CONSTANTS::KEY) {
 					this.delete_event(event);
 				},
 				delete_event: function(event) {
-					fetch('/api.php?query=delete_event&id='+encodeURI(event.id))
+					fetch('api.php?query=delete_event&id='+encodeURI(event.id))
 						.then(_ => { this.get_events(this.today); });
 				},
 				get_serifs: function() {
-					fetch('/api.php?query=get_serifs')
+					fetch('api.php?query=get_serifs')
 						.then(r => r.json())
 						.then(r => {
 							this.serifs = r;
@@ -284,7 +284,7 @@ if (!isset($_GET['key']) || $_Get['key'] != CONSTANTS::KEY) {
 					if (serif_content) {
 						this.new_serif_content = "";
 
-						fetch('/api.php?query=add_serif&content=' + encodeURI(serif_content))
+						fetch('api.php?query=add_serif&content=' + encodeURI(serif_content))
 							.then(_ => { this.get_serifs(); });
 					}
 				},
@@ -293,12 +293,12 @@ if (!isset($_GET['key']) || $_Get['key'] != CONSTANTS::KEY) {
 					this.delete_serif(serif);
 				},
 				delete_serif: function(serif) {
-						fetch('/api.php?query=delete_serif&id=' + encodeURI(serif.id))
+						fetch('api.php?query=delete_serif&id=' + encodeURI(serif.id))
 						.then(_ => { this.get_serifs(); });
 				},
 
 				get_timetable: function(date) {
-					fetch('/api.php?query=get_timetable&date='+encodeURI(date))
+					fetch('api.php?query=get_timetable&date='+encodeURI(date))
 						.then(r => r.json())
 						.then(r => {
 							if (r.hasOwnProperty("classes")) {
@@ -315,7 +315,7 @@ if (!isset($_GET['key']) || $_Get['key'] != CONSTANTS::KEY) {
 						query = query + '&' + (i+1) + '=' + encodeURI(this.timetable[i]);
 					}
 
-					fetch('/api.php?query=set_timetable&date='+this.today+query);
+					fetch('api.php?query=set_timetable&date='+this.today+query);
 					this.get_timetable(this.today);
 				},
 				set_timetable_for_date: function() {
@@ -324,7 +324,7 @@ if (!isset($_GET['key']) || $_Get['key'] != CONSTANTS::KEY) {
 						query = query + '&' + (i+1) + '=' + encodeURI(this.timetable[i]);
 					}
 
-					fetch('/api.php?query=set_timetable_for_date&date='+this.today+query);
+					fetch('api.php?query=set_timetable_for_date&date='+this.today+query);
 					this.get_timetable(this.today);
 				},
 				timetable_table: function() {
@@ -366,7 +366,7 @@ if (!isset($_GET['key']) || $_Get['key'] != CONSTANTS::KEY) {
 				},
 
 				get_images: function() {
-					fetch('/api.php?query=get_images')
+					fetch('api.php?query=get_images')
 						.then(r => r.json())
 						.then(r => {
 							this.images = r;
