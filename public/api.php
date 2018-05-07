@@ -3,6 +3,7 @@
 require_once '../define.php';
 require_once '../database.php';
 require_once '../lib.php';
+require_once '../line.php';
 
 
 function json($data) {
@@ -153,6 +154,13 @@ else {
   else if ($query === 'get_images') {
     $images = glob('images/*');
     json($images);
+  }
+  else if ($query === 'ranko_speak') {
+    $serif = $_GET['serif'];
+
+    $logger = new PoorLogger("daily.log");
+    $request = new Request(CONSTANTS::ACCESS_TOKEN, CONSTANTS::CHANNEL_SECRET, $logger);
+    $request->push(CONSTANTS::GROUP_ID, $request->text($serif)); 
   }
 
   else {

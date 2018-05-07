@@ -145,6 +145,11 @@ if (!isset($_GET['key']) || $_GET['key'] != CONSTANTS::KEY) {
 			<button>追加</button>
 		</form>
 
+    <h3>熊本の言葉</h3>
+    <form @submit.prevent="speak()">
+      <textarea v-model="ranko_speak" cols="30" rows="10"></textarea>
+      <button>言う</button>
+    </form>
 
 		<h3>鏡像</h3>
 		<div class="images">
@@ -207,6 +212,7 @@ if (!isset($_GET['key']) || $_GET['key'] != CONSTANTS::KEY) {
 
 				today: null,
 				today_input: null,
+        speak: "",
 			},
 			methods: {
 				get_memos: function() {
@@ -371,6 +377,10 @@ if (!isset($_GET['key']) || $_GET['key'] != CONSTANTS::KEY) {
 						.then(r => {
 							this.images = r;
 						});
+				},
+				speak: function() {
+					fetch('api.php?query=ranko_speak&serif='+encodeURI(this.speak));
+          this.speak = "";
 				}
 			},
 			filters: {
