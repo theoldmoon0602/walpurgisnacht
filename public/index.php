@@ -212,7 +212,7 @@ if (!isset($_GET['key']) || $_GET['key'] != CONSTANTS::KEY) {
 
 				today: null,
 				today_input: null,
-        speak: "",
+        ranko_speak: "",
 			},
 			methods: {
 				get_memos: function() {
@@ -379,8 +379,8 @@ if (!isset($_GET['key']) || $_GET['key'] != CONSTANTS::KEY) {
 						});
 				},
 				speak: function() {
-					fetch('api.php?query=ranko_speak&serif='+encodeURI(this.speak));
-          this.speak = "";
+					fetch('api.php?query=ranko_speak&serif='+encodeURI(this.ranko_speak));
+          this.ranko_speak = "";
 				}
 			},
 			filters: {
